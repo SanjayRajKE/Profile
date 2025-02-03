@@ -47,24 +47,27 @@
             line-height: 1.6;
         }
 
-        /* Dynamic Background Pattern */
-        body::after {
-            content: "";
+        /* Dark Mode Toggle */
+        #theme-toggle {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(var(--primary-color) 1px, transparent 1px);
-            background-size: 40px 40px;
-            opacity: 0.05;
-            z-index: -1;
-            animation: moveBackground 100s linear infinite;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
         }
 
-        @keyframes moveBackground {
-            from { background-position: 0 0; }
-            to { background-position: 1000px 1000px; }
+        #theme-toggle:hover {
+            transform: scale(1.1);
         }
 
         /* Header */
@@ -300,6 +303,11 @@
     </style>
 </head>
 <body>
+    <!-- Dark Mode Toggle -->
+    <button id="theme-toggle" title="Toggle Dark Mode">
+        <i class="fas fa-moon"></i>
+    </button>
+
     <header>
         <div class="profile-container">
             <h1>Sanjay Raj Kumaravel Esakki</h1>
@@ -356,7 +364,7 @@
             </div>
         </a>
 
-        <!-- Project 2: Wiring Harness -->
+<!-- Project 2: Wiring Harness -->
     <a href="https://skill-lync.com/student-projects/project-1-20488" target="_blank">
         <div class="project">
             <h3>Design and Implementation of Automotive Wiring Harness</h3>
@@ -533,7 +541,6 @@
 
             </div>
         </div>
-        </a>
     </section>
 
     <section id="contact">
@@ -563,6 +570,22 @@
     </footer>
 
     <script>
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = body.getAttribute('data-theme') === 'dark';
+            body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            themeToggle.innerHTML = isDark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        });
+
+        // Initialize Theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        body.setAttribute('data-theme', savedTheme);
+        themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+
         // Personalized Greeting
         const hour = new Date().getHours();
         const greeting = hour < 12 ? "Good morning!" : 
