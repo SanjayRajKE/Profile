@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanjay Raj - Automotive Engineer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2A5C82; /* Deep Blue */
+            --secondary-color: #32B3C7; /* Teal */
+            --accent-color: #FF6B6B; /* Red for accents */
+            --background-color: #FFFFFF; /* White */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--background-color);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        section {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 3rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 70%;
+            background: var(--secondary-color);
+            border-radius: 5px;
+        }
+
+        .project {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        .project::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--secondary-color);
+            border-radius: 3px 0 0 3px;
+        }
+
+        .project h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .project-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .project-details ul {
+            list-style: none;
+            padding-left: 1.5rem;
+        }
+
+        .project-details li {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .project-details li::before {
+            content: '▹';
+            position: absolute;
+            left: -1.5rem;
+            color: var(--secondary-color);
+        }
+
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .skills-tags span {
+            background: #e3f2fd;
+            color: var(--primary-color);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(42, 92, 130, 0.1);
+        }
+
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            section {
+                margin: 1.5rem;
+                padding: 2rem;
+            }
+
+            header {
+                padding: 3rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="profile-container">
+            <h1>Sanjay Raj Kumaravel Esakki</h1>
+            <p class="tagline">Automotive Engineer | Design Engineer | EV Enthusiast</p>
+            <div class="btn-container">
+                <a href="#contact" class="btn btn-primary"><i class="fas fa-envelope"></i> Contact Me</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="fade-in">
+        <h2>About Me</h2>
+        <p>I am a driven Automotive Engineer specializing in Sustainable Mobility and Vehicle Dynamics, with a strong passion for developing cutting-edge automotive solutions. Skilled in design engineering and proficient in emerging technologies, I strive to innovate and optimize vehicle performance, efficiency, and sustainability.</p>
+    </section>
+
+    <section id="skills" class="fade-in">
+        <h2>Technical Skills</h2>
+        <div class="skills-tags">
+            <span>Automobile Engineering</span>
+            <span>CATIA V5</span>
+            <span>Siemens NX</span>
+            <span>SolidWorks</span>
+            <span>Sheet Metal Design</span>
+            <span>Plastic Design</span>
+            <span>Wiring Harness</span>
+            <span>GD&T</span>
+            <span>BIW Fixture Design</span>
+            <span>LabVIEW</span>
+            <span>Python</span>
+            <span>C/C++</span>
+        </div>
+    </section>
+
+    <section id="projects" class="fade-in">
+    <h2>Key Projects</h2>
+
+    <!-- Project 1: Butterfly Valve -->
+    <a href="https://skill-lync.com/student-projects/week-14-challenge-66d6a8c8c8c11" target="_blank">
+        <div class="project">
+            <h3>Design and Assembly of Butterfly Valve</h3>
+            <div class="project-date">Sep 2024</div>
+            <div class="project-details">
+                <ul>
+                    <li>Created components using 2D blueprints</li>
+                    <li>Performed complete valve assembly</li>
+                    <li>Applied GD&T methods to components</li>
+                </ul>
+                <div class="skills-tags">
+                    <span>NX-CAD</span>
+                    <span>ASME Y14.5</span>
+                    <span>Technical Writing</span>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <!-- Project 2: Wiring Harness -->
+    <a href="https://skill-lync.com/student-projects/project-1-20488" target="_blank">
+        <div class="project">
+            <h3>Design and Implementation of Automotive Wiring Harness</h3>
+            <div class="project-date">Jul 2024 - Aug 2024</div>
+            <div class="project-details">
+                <ul>
+                    <li>Identified parts of the harness assembly and described electrical and mounting components for precise alignment</li>
+                    <li>Adhered to industry-standard packaging guidelines and best practices for harness fastening, branching, and protective covers</li>
+                    <li>Created intricate 2D renderings to visualize the exact arrangement and configuration of the harness assembly</li>
+                </ul>
+                <div class="skills-tags">
+                    <span>Wiring Harness</span>
+                    <span>Automotive Electronics</span>
+                    <span>CATIA</span>
+                    <span>Technical Writing</span>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <!-- Project 3: Automotive Roof/ Car Top (BIW) -->
+    <a href="https://skill-lync.com/student-projects/roof-design-1088" target="_blank">
+        <div class="project">
+            <h3>Design and Development of Automotive Roof/ Car Top (BIW)</h3>
+            <div class="project-date">May 2024 - Jun 2024</div>
+            <div class="project-details">
+                <ul>
+                    <li>Created and assembled a roof panel assembly with bow roofs and front/back roof rails</li>
+                    <li>Improved structural integrity with three bow roofs and curvature variations for effective load distribution</li>
+                    <li>Conducted heat distortion and snow load assessments to optimize bow roof locations</li>
+                </ul>
+                <div class="skills-tags">
+                    <span>Sheet Metal Design</span>
+                    <span>BIW</span>
+                    <span>3D Modeling</span>
+                    <span>NX-CAD</span>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <!-- Project 4: Bonnet/Hood (BIW) -->
+    <a href="https://skill-lync.com/student-projects/hood-design-week-2-1985" target="_blank">
+        <div class="project">
+            <h3>Design and Development of Bonnet/Hood (BIW)</h3>
+            <div class="project-date">Apr 2024 - May 2024</div>
+            <div class="project-details">
+                <ul>
+                    <li>Designed and assembled a car hood assembly with hinges, latch systems, and reinforcements</li>
+                    <li>Implemented design standards like mastic seals, embosses, and pedestrian safety measures</li>
+                </ul>
+                <div class="skills-tags">
+                    <span>NX-CAD</span>
+                    <span>BIW</span>
+                    <span>Sheet Metal Design</span>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <!-- Project 5: Back Door/Tailgate (BIW) -->
+    <a href="https://skill-lync.com/student-projects/design-of-backdoor-1685" target="_blank">
+        <div class="project">
+            <h3>Design and Development of Back Door/Tailgate (BIW)</h3>
+            <div class="project-date">Mar 2024 - Apr 2024</div>
+            <div class="project-details">
+                <ul>
+                    <li>Inspected and repaired class A surfaces for smooth blending and appearance</li>
+                    <li>Designed a complete backdoor assembly with hinges, gas stays, and wiper motor mountings</li>
+                    <li>Optimized weight reduction and improved rigidity with strategically placed embosses</li>
+                </ul>
+                <div class="skills-tags">
+                    <span>Sheet Metal Design</span>
+                    <span>BIW</span>
+                    <span>NX-CAD</span>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <!-- Project 6: Front Fender (BIW) -->
+    <a href="https://skill-lync.com/student-projects/fender-design-3324" target="_blank">
+        <div class="project">
+            <h3>Design and Development of Front Fender (BIW)</h3>
+            <div class="project-date">Feb 2024 - Mar 2024</div>
+            <div class="project-details">
+                <ul>
+                    <li>Designed and built a front fender using master section and skin data</li>
+                    <li>Integrated mounting elements like baffle mountings and bumper mounting for structural integrity</li>
+                </ul>
+                <div class="skills-tags">
+                    <span>Sheet Metal Design</span>
+                    <span>BIW</span>
+                    <span>NX-CAD</span>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <!-- Project 7: Automotive Trims -->
+    <a href="https://skill-lync.com/profiles/sanjay-raj-yh2bq" target="_blank">
+        <div class="project">
+            <h3>Design and Development of Automotive Trims</h3>
+            <div class="project-date">Oct 2023 - Nov 2023</div>
+            <div class="project-details">
+                <ul>
+                    <li>Designed plastic components like base brackets, switch bezels, and bumpers</li>
+                    <li>Demonstrated expertise in 2D and 3D modeling techniques for precise representation</li>
+                </ul>
+                <div class="skills-tags">
+                    <span>CATIA</span>
+                    <span>Plastic Part Design</span>
+                    <span>Interior Design</span>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <!-- Project 8: Door Card/Panel (Interior Trim) -->
+    <a href="https://skill-lync.com/student-projects/week-10-challenge-3-door-trim-lower-with-engineering-features-473-180790" target="_blank">
+        <div class="project">
+            <h3>Design and Development of Door Card/Panel (Interior Trim)</h3>
+            <div class="project-date">Sep 2023 - Oct 2023</div>
+            <div class="project-details">
+                <ul>
+                    <li>Inspected and maintained door trim panel class A surfaces for smooth integration</li>
+                    <li>Designed attachment elements like ribs, screw bosses, and heat stakes for secure integration</li>
+                </ul>
+                <div class="skills-tags">
+                    <span>CATIA</span>
+                    <span>Plastic Part Design</span>
+                    <span>3D Modeling</span>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <!-- Project 9: Electronic Irrigation System -->
+    <a href="https://drive.google.com/file/d/1KhfMrl0m6CZdpyf-eqUlI5UGjS4YwY3d/view?usp=sharing" target="_blank">
+        <div class="project">
+            <h3>Electronic Irrigation System</h3>
+            <div class="project-date">Jan 2021 - May 2021</div>
+            <div class="project-details">
+                <ul>
+                    <li>Developed a solar-powered automatic irrigation system that checks soil moisture content</li>
+                    <li>Optimized water usage by irrigating only when necessary</li>
+                </ul>
+            </div>
+        </div>
+    </a>
+
+    <!-- Project 10: Autonomous Vehicle Simulation -->
+        <div class="project">
+            <h3>Autonomous Vehicle: Simulation and Development</h3>
+            <div class="project-date">Nov 2022</div>
+            <div class="project-details">
+                <ul>
+                    <li>Developed and simulated autonomous vehicle behavior in various environments</li>
+                    <li>Tested and evaluated autonomous vehicle algorithms in a simulated environment</li>
+                </ul>
+            </div>
+        </div>
+    </a>
+
+    <!-- Project 11: Centralised Industrial Mobile Pallet -->
+    <a href="https://ymerdigital.com/uploads/YMER220596.pdf" target="_blank">
+        <div class="project">
+            <h3>Centralised Industrial Mobile Pallet (CIMP)</h3>
+            <div class="project-details">
+                <ul>
+<li>Designed a mobile pallet system to improve efficiency in industrial operations</li>
+                    <li>Reduced manual labor and time required for pallet movement through automation</li>
+                </ul>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="fade-in">
+        <h2>Get in Touch</h2>
+        <div class="contact-info">
+            <p>
+                <i class="fas fa-envelope"></i> 
+                <a href="mailto:sanjayrajke15@gmail.com">sanjayrajke15@gmail.com</a>
+            </p>
+            <p>
+                <i class="fab fa-linkedin"></i> 
+                <a href="https://www.linkedin.com/in/sanjayrajke" target="_blank">Sanjay Raj Kumaravel Esakki</a>
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="mailto:sanjayrajke15@gmail.com" title="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/sanjayrajke" target="_blank" title="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+        </div>
+        <p>&copy; 2025 Sanjay Raj Kumaravel Esakki | Built with passion for automotive innovation</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const sections = document.querySelectorAll("section");
+            const options = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            }, options);
+
+            sections.forEach(section => observer.observe(section));
+        });
+    </script>
+</body>
+</html>
