@@ -47,65 +47,24 @@
             line-height: 1.6;
         }
 
-        /* Loading Animation */
-        #loading {
+        /* Dynamic Background Pattern */
+        body::after {
+            content: "";
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--primary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            opacity: 1;
-            transition: opacity 0.5s ease;
+            background-image: radial-gradient(var(--primary-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.05;
+            z-index: -1;
+            animation: moveBackground 100s linear infinite;
         }
 
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Navigation */
-        nav {
-            position: sticky;
-            top: 0;
-            background: var(--primary-color);
-            padding: 1rem;
-            z-index: 1000;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-        }
-
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-        }
-
-        nav a:hover {
-            background: rgba(255,255,255,0.15);
-            transform: translateY(-2px);
+        @keyframes moveBackground {
+            from { background-position: 0 0; }
+            to { background-position: 1000px 1000px; }
         }
 
         /* Header */
@@ -324,52 +283,6 @@
             transform: translateY(-3px);
         }
 
-        /* Theme Toggle */
-        #theme-toggle {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-        }
-
-        #theme-toggle:hover {
-            transform: scale(1.1) rotate(180deg);
-        }
-
-        /* Back to Top */
-        #back-to-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-        }
-
-        #back-to-top:hover {
-            transform: scale(1.1);
-        }
-
         @media (max-width: 768px) {
             section {
                 margin: 1.5rem;
@@ -383,37 +296,14 @@
             h1 {
                 font-size: 2rem;
             }
-
-            nav ul {
-                gap: 1rem;
-            }
         }
     </style>
 </head>
 <body>
-    <div id="loading"><div class="spinner"></div></div>
-
-    <nav>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-
-    <button id="theme-toggle" title="Toggle Dark Mode">
-        <i class="fas fa-moon"></i>
-    </button>
-
-    <button id="back-to-top" title="Go to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
     <header>
         <div class="profile-container">
             <h1>Sanjay Raj Kumaravel Esakki</h1>
-            <p class="tagline">Automotive Engineer | Design Engineer | EV Enthusiast</p>
+            <p class="tagline" id="greeting">Good morning! I'm Sanjay Raj, an Automotive Engineer.</p>
             <div class="btn-container">
                 <a href="#contact" class="btn btn-primary"><i class="fas fa-envelope"></i> Contact Me</a>
             </div>
@@ -446,6 +336,7 @@
     <section id="projects">
         <h2>Key Projects</h2>
 
+        <!-- Project 1: Butterfly Valve -->
         <a href="https://skill-lync.com/student-projects/week-14-challenge-66d6a8c8c8c11" target="_blank">
             <div class="project">
                 <h3>Design and Assembly of Butterfly Valve</h3>
@@ -642,7 +533,6 @@
 
             </div>
         </div>
-
     </section>
 
     <section id="contact">
@@ -672,33 +562,11 @@
     </footer>
 
     <script>
-        // Loading Screen
-        window.addEventListener("load", () => {
-            const loading = document.getElementById("loading");
-            loading.style.opacity = '0';
-            setTimeout(() => loading.style.display = 'none', 500);
-        });
-
-        // Theme Toggle
-        const themeToggle = document.getElementById("theme-toggle");
-        const body = document.body;
-        
-        themeToggle.addEventListener("click", () => {
-            const isDark = body.getAttribute('data-theme') === 'dark';
-            body.setAttribute('data-theme', isDark ? 'light' : 'dark');
-            themeToggle.innerHTML = isDark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
-            localStorage.setItem('theme', isDark ? 'light' : 'dark');
-        });
-
-        // Back to Top
-        window.addEventListener("scroll", () => {
-            const backToTop = document.getElementById("back-to-top");
-            backToTop.style.display = window.scrollY > 300 ? 'flex' : 'none';
-        });
-
-        document.getElementById("back-to-top").addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        // Personalized Greeting
+        const hour = new Date().getHours();
+        const greeting = hour < 12 ? "Good morning!" : 
+                        hour < 18 ? "Good afternoon!" : "Good evening!";
+        document.getElementById('greeting').textContent = `${greeting} I'm Sanjay Raj, an Automotive Engineer.`;
 
         // Section Animations
         const observer = new IntersectionObserver((entries) => {
@@ -710,11 +578,6 @@
         }, { threshold: 0.1 });
 
         document.querySelectorAll("section").forEach(section => observer.observe(section));
-
-        // Initial Theme
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        body.setAttribute('data-theme', savedTheme);
-        themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
     </script>
 </body>
 </html>
